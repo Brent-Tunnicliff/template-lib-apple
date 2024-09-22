@@ -1,6 +1,6 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
-// Copyright © 2023 Brent Tunnicliff <brent@tunnicliff.dev>
+// Copyright © 2024 Brent Tunnicliff <brent@tunnicliff.dev>
 
 import PackageDescription
 
@@ -11,32 +11,31 @@ let package = Package(
         .macOS(.v14),
         .tvOS(.v17),
         .watchOS(.v10),
+        .visionOS(.v2),
     ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "REPLACE_ME",
             targets: ["REPLACE_ME"]
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/Brent-Tunnicliff/swift-format-plugin", .upToNextMajor(from: "1.0.0")),
-        .package(path: "../rename_template"),
+        .package(url: "https://github.com/Brent-Tunnicliff/swift-format-plugin", .upToNextMajor(from: "2.0.0")),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "REPLACE_ME",
+            path: "Sources/REPLACE_ME",
             plugins: [
-                .plugin(name: "lint", package: "swift-format-plugin"),
+                .plugin(name: "LintBuildPlugin", package: "swift-format-plugin"),
             ]
         ),
         .testTarget(
             name: "REPLACE_METests",
             dependencies: ["REPLACE_ME"],
+            path: "Tests/REPLACE_METests",
             plugins: [
-                .plugin(name: "lint", package: "swift-format-plugin"),
+                .plugin(name: "LintBuildPlugin", package: "swift-format-plugin"),
             ]
         ),
     ]

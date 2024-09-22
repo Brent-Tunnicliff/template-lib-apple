@@ -1,17 +1,13 @@
-# WORK IN PROGRESS
+# template-lib-apple
 
-This template is still in initial development, may not work and subject to change.
+Template as a base for all my Apple libraries.
+Project contains the package and a nested demo app `Demo/`.
+Only the package or the demo app can be opened at a time.
 
-# template-ios
+After generating the repository find all cases of `REPLACE_ME` and rename them.
 
-Template for me to quickly spin up iOS projects.
-Delete what you don't need.
+## Disclaimer
 
-## Dev Setup
-
-- Edit the project to replace all cases of `REPLACE_ME` with the real names.
-- Setup [rbenv](https://github.com/rbenv/rbenv) by following it's [installation instructions](https://github.com/rbenv/rbenv#installation). This is for managing ruby version.
-- Run `rbenv install` to install the expected ruby version. This is defined in the `.ruby-version` file.
-- Install Bundler with `gem install bundler`.
-- Install ruby gems with `bundle install`. These are defined in the `Gemfile` file.
-- Install [swift-format](https://github.com/apple/swift-format) with `brew install swift-format`
+This project are open source and open to anyone to use as they see fit.
+But I am building these with myself as the main target audience,
+so this will not be published anywhere.
