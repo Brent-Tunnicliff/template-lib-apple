@@ -4,7 +4,7 @@ Template as a base for all my Apple libraries.
 Project contains the package and a nested demo app `Demo/`.
 Only the package or the demo app can be opened at a time.
 
-After generating the repository find all cases of `REPLACE_ME` and rename them.
+After generating the repository find all cases of `REPLACE_ME` and `REPLACE-ME` and rename them.
 
 ## Disclaimer
 
