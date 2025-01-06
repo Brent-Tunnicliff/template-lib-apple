@@ -1,4 +1,4 @@
-// Copyright © 2024 Brent Tunnicliff <brent@tunnicliff.dev>
+// Copyright © 2025 Brent Tunnicliff <brent@tunnicliff.dev>
 
 import SwiftUI
 

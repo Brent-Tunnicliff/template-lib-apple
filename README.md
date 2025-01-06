@@ -2,7 +2,8 @@
 
 Template as a base for all my Apple libraries.
 Project contains the package and a nested demo app `Demo/`.
-Only the package or the demo app can be opened at a time.
+
+Open `Package.xcworkspace` in Xcode to edit and run both the package and the demo app.
 
 After generating the repository find all cases of `REPLACE_ME` and `REPLACE-ME` and rename them.
 

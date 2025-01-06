@@ -1,4 +1,4 @@
-// Copyright © 2024 Brent Tunnicliff <brent@tunnicliff.dev>
+// Copyright © 2025 Brent Tunnicliff <brent@tunnicliff.dev>
 
 /// Example type to be replaced in the real project.
 public final class Example: Sendable {

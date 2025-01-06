@@ -1,6 +1,6 @@
 // swift-tools-version: 6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
-// Copyright © 2024 Brent Tunnicliff <brent@tunnicliff.dev>
+// Copyright © 2025 Brent Tunnicliff <brent@tunnicliff.dev>
 
 import PackageDescription
 
@@ -25,7 +25,6 @@ let package = Package(
     targets: [
         .target(
             name: "REPLACE_ME",
-            path: "Sources/REPLACE_ME",
             plugins: [
                 .plugin(name: "LintBuildPlugin", package: "swift-format-plugin"),
             ]
@@ -33,7 +32,6 @@ let package = Package(
         .testTarget(
             name: "REPLACE_METests",
             dependencies: ["REPLACE_ME"],
-            path: "Tests/REPLACE_METests",
             plugins: [
                 .plugin(name: "LintBuildPlugin", package: "swift-format-plugin"),
             ]
