@@ -4,6 +4,11 @@
 
 import PackageDescription
 
+private let swiftSettings: [PackageDescription.SwiftSetting] = [
+    .enableUpcomingFeature("ExistentialAny"),
+    .enableUpcomingFeature("InternalImportsByDefault"),
+]
+
 let package = Package(
     name: "REPLACE_ME",
     platforms: [
@@ -25,6 +30,7 @@ let package = Package(
     targets: [
         .target(
             name: "REPLACE_ME",
+            swiftSettings: swiftSettings,
             plugins: [
                 .plugin(name: "LintBuildPlugin", package: "swift-format-plugin"),
             ]
@@ -32,6 +38,7 @@ let package = Package(
         .testTarget(
             name: "REPLACE_METests",
             dependencies: ["REPLACE_ME"],
+            swiftSettings: swiftSettings,
             plugins: [
                 .plugin(name: "LintBuildPlugin", package: "swift-format-plugin"),
             ]
