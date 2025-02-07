@@ -24,17 +24,17 @@ let package = Package(
         .library(
             name: "REPLACE_ME",
             targets: ["REPLACE_ME"]
-        ),
+        )
     ],
     dependencies: [
-        .package(url: "https://github.com/Brent-Tunnicliff/swift-format-plugin", .upToNextMajor(from: "2.0.0")),
+        .package(url: "https://github.com/Brent-Tunnicliff/swift-format-plugin", .upToNextMajor(from: "2.0.0"))
     ],
     targets: [
         .target(
             name: "REPLACE_ME",
             swiftSettings: swiftSettings,
             plugins: [
-                lintBuildPlugin,
+                lintBuildPlugin
             ]
         ),
         .testTarget(
@@ -42,7 +42,7 @@ let package = Package(
             dependencies: ["REPLACE_ME"],
             swiftSettings: swiftSettings,
             plugins: [
-                lintBuildPlugin,
+                lintBuildPlugin
             ]
         ),
     ]
