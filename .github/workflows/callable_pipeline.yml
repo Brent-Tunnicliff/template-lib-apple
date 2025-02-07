@@ -11,7 +11,7 @@ on:
         required: true
         type: string
 jobs:
-  build:
+  pipeline:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
@@ -43,6 +43,7 @@ jobs:
           CODE_SIGN_IDENTITY=""
           CODE_SIGNING_REQUIRED=NO
       - name: Build Demo
+        if: ${{ ! contains(inputs.destination, "watchOS") }}
         run: xcodebuild build
           -workspace "Package.xcworkspace"
           -scheme "Demo"
