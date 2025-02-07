@@ -9,6 +9,8 @@ private let swiftSettings: [PackageDescription.SwiftSetting] = [
     .enableUpcomingFeature("InternalImportsByDefault"),
 ]
 
+private let lintBuildPlugin: Target.PluginUsage = .plugin(name: "LintBuildPlugin", package: "swift-format-plugin")
+
 let package = Package(
     name: "REPLACE_ME",
     platforms: [
@@ -32,7 +34,7 @@ let package = Package(
             name: "REPLACE_ME",
             swiftSettings: swiftSettings,
             plugins: [
-                .plugin(name: "LintBuildPlugin", package: "swift-format-plugin"),
+                lintBuildPlugin,
             ]
         ),
         .testTarget(
@@ -40,7 +42,7 @@ let package = Package(
             dependencies: ["REPLACE_ME"],
             swiftSettings: swiftSettings,
             plugins: [
-                .plugin(name: "LintBuildPlugin", package: "swift-format-plugin"),
+                lintBuildPlugin,
             ]
         ),
     ]
