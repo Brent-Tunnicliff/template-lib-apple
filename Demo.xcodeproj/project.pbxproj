@@ -64,6 +64,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				84AA7F572D563950006598D6 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8457976E2C9EED48001B833D /* Demo */,
@@ -102,6 +103,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				84A7B7A12CA03B9400E54AE4 /* XCLocalSwiftPackageReference "../template-lib-apple" */,
+				84AA7F552D563944006598D6 /* XCRemoteSwiftPackageReference "swift-format-plugin" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8457976D2C9EED48001B833D /* Products */;
@@ -132,6 +134,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		84AA7F572D563950006598D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 84AA7F562D563950006598D6 /* LintBuildPlugin */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		845797792C9EED49001B833D /* Debug */ = {
@@ -371,10 +380,26 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		84AA7F552D563944006598D6 /* XCRemoteSwiftPackageReference "swift-format-plugin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Brent-Tunnicliff/swift-format-plugin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		84A7B7A22CA03B9400E54AE4 /* REPLACE_ME */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = REPLACE_ME;
+		};
+		84AA7F562D563950006598D6 /* LintBuildPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84AA7F552D563944006598D6 /* XCRemoteSwiftPackageReference "swift-format-plugin" */;
+			productName = "plugin:LintBuildPlugin";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
