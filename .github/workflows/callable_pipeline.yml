@@ -38,7 +38,7 @@ jobs:
       - name: Run Package Unit tests
         run: xcodebuild test-without-building
           -workspace "Package.xcworkspace"
-          -scheme "App"
+          -scheme "Package"
           -destination "${{ inputs.destination }}"
           CODE_SIGN_IDENTITY=""
           CODE_SIGNING_REQUIRED=NO

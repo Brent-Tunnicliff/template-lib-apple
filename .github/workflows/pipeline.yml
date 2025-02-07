@@ -19,6 +19,10 @@ jobs:
     uses: ./.github/workflows/callable_pipeline.yml
     with:
       destination: "platform=tvOS Simulator,name=Apple TV"
+  watchOS:
+    uses: ./.github/workflows/callable_pipeline.yml
+    with:
+      destination: "platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)"
   visionOS:
     uses: ./.github/workflows/callable_pipeline.yml
     with:
