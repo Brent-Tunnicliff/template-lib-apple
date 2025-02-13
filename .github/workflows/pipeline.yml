@@ -7,23 +7,30 @@ on:
   workflow_dispatch:
 
 jobs:
-  iOS:
-    uses: ./.github/workflows/callable_pipeline.yml
+  pipeline:
+    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/common.yml@wip
+    strategy:
+      matrix:
+        platform: ["iOS", "macOS", "tvOS", "watchOS", "visionOS"]
+        scheme: ["Package", "Demo"]
+        skip_tests: [true, false]
+        exclude:
+          - platform: "iOS"
+            skip_tests: true
+          - platform: "macOS"
+            skip_tests: true
+          - platform: "tvOS"
+            skip_tests: true
+          - platform: "visionOS"
+            skip_tests: true
+          - platform: "watchOS"
+            scheme: "Package"
+            skip_tests: true
+          - platform: "watchOS"
+            scheme: "Demo"
+            skip_tests: false
     with:
-      destination: "platform=iOS Simulator,name=iPhone 16"
-  macOS:
-    uses: ./.github/workflows/callable_pipeline.yml
-    with:
-      destination: "platform=macOS"
-  tvOS:
-    uses: ./.github/workflows/callable_pipeline.yml
-    with:
-      destination: "platform=tvOS Simulator,name=Apple TV"
-  watchOS:
-    uses: ./.github/workflows/callable_pipeline.yml
-    with:
-      destination: "platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)"
-  visionOS:
-    uses: ./.github/workflows/callable_pipeline.yml
-    with:
-      destination: "platform=visionOS Simulator,name=Apple Vision Pro"
+      platform: "${{ matrix.platform }}"
+      scheme: "${{ matrix.scheme }}"
+      skip_tests: ${{ matrix.skip_tests }}
+      workspace: "Package.xcworkspace"
