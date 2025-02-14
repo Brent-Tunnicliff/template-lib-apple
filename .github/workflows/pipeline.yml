@@ -7,30 +7,23 @@ on:
   workflow_dispatch:
 
 jobs:
-  pipeline:
+  package:
     uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/common.yml@wip
     strategy:
       matrix:
         platform: ["iOS", "macOS", "tvOS", "watchOS", "visionOS"]
-        scheme: ["Package", "Demo"]
-        skip_tests: [true, false]
-        exclude:
-          - platform: "iOS"
-            skip_tests: true
-          - platform: "macOS"
-            skip_tests: true
-          - platform: "tvOS"
-            skip_tests: true
-          - platform: "visionOS"
-            skip_tests: true
-          - platform: "watchOS"
-            scheme: "Package"
-            skip_tests: true
-          - platform: "watchOS"
-            scheme: "Demo"
-            skip_tests: false
     with:
       platform: "${{ matrix.platform }}"
-      scheme: "${{ matrix.scheme }}"
-      skip_tests: ${{ matrix.skip_tests }}
+      scheme: "Package"
+      skip_tests: false
+      workspace: "Package.xcworkspace"
+  demo:
+    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/common.yml@wip
+    strategy:
+      matrix:
+        platform: ["iOS", "macOS", "tvOS", "visionOS"]
+    with:
+      platform: "${{ matrix.platform }}"
+      scheme: "Demo"
+      skip_tests: true
       workspace: "Package.xcworkspace"
