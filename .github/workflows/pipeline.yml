@@ -7,33 +7,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  package:
-    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/common.yml@v1
-    name: Package
+  pipeline:
+    runs-on: macos-15
     strategy:
       matrix:
-        platform: ["iOS", "macOS", "tvOS", "watchOS", "visionOS"]
-    with:
-      platform: "${{ matrix.platform }}"
-      scheme: "REPLACE_ME"
-      skip_tests: false
-      workspace: "Package.xcworkspace"
-  demo:
-    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/common.yml@v1
-    name: Demo
-    strategy:
-      matrix:
-        platform: ["iOS", "macOS", "tvOS", "visionOS"]
-    with:
-      platform: "${{ matrix.platform }}"
-      scheme: "Demo"
-      skip_tests: true
-      workspace: "Package.xcworkspace"
-  demo_watch:
-    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/common.yml@v1
-    name: Demo (watchOS)
-    with:
-      platform: "watchOS"
-      scheme: "Demo Watch App"
-      skip_tests: true
-      workspace: "Package.xcworkspace"
+        target: [
+          { platform: "iOS", simulator_version: "18" },
+          { platform: "macOS", simulator_version: "" },
+          { platform: "tvOS", simulator_version: "18" },
+          { platform: "watchOS", simulator_version: "11" },
+          { platform: "visionOS", simulator_version: "2" }
+        ]
+    steps:
+      - name: List installed simulators
+        run: xcrun simctl list devices
+      - id: destination
+        uses: Brent-Tunnicliff/action-xcodebuild-destination-apple@58f1ad40ed684597e919ce52c48e22358b091f1d
+        with:
+          platform: "${{ matrix.target.platform }}"
+          simulator_version: "${{ matrix.target.simulator_version }}"
+      - name: Test
+        run: echo "${{ steps.destination.outputs.destination }}"
