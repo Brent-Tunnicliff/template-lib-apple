@@ -21,10 +21,25 @@ jobs:
     steps:
       - name: List installed simulators
         run: xcrun simctl list devices
+
       - id: destination
         uses: Brent-Tunnicliff/action-xcodebuild-destination-apple@58f1ad40ed684597e919ce52c48e22358b091f1d
         with:
           platform: "${{ matrix.target.platform }}"
           simulator_version: "${{ matrix.target.simulator_version }}"
-      - name: Test
-        run: echo "${{ steps.destination.outputs.destination }}"
+
+      - uses: actions/checkout@v4
+
+      - name: Set Xcode version
+        run: sudo xcode-select -s "/Applications/Xcode_16.4.app"
+
+      # Making a build manually to test destination is working.
+      - name: Build Debug
+        run: xcodebuild build
+          -workspace "Package.xcworkspace"
+          -scheme "REPLACE_ME"
+          -destination "${{ steps.destination.outputs.destination }}"
+          -configuration "Debug"
+          -skipPackagePluginValidation
+          CODE_SIGN_IDENTITY=""
+          CODE_SIGNING_REQUIRED=NO
