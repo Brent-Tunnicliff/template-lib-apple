@@ -23,7 +23,7 @@ jobs:
         run: xcrun simctl list devices
 
       - id: destination
-        uses: Brent-Tunnicliff/action-xcodebuild-destination-apple@58f1ad40ed684597e919ce52c48e22358b091f1d
+        uses: Brent-Tunnicliff/action-xcodebuild-destination-apple@v1
         with:
           platform: "${{ matrix.target.platform }}"
           simulator_version: "${{ matrix.target.simulator_version }}"
