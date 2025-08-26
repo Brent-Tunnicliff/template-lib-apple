@@ -6,23 +6,36 @@ on:
   push:
   workflow_dispatch:
 
+env:
+  DEMO_SCHEME: "Demo"
+  DEMO_WATCH_SCHEME: "Demo Watch"
+  PACKAGE_SCHEME: "REPLACE_ME"
+  WORKSPACE: "Package.xcworkspace"
+
 jobs:
-  pipeline:
+  test:
     runs-on: macos-15
     strategy:
       matrix:
         target: [
           { platform: "iOS", simulator_version: "18" },
-          { platform: "macOS", simulator_version: "" },
           { platform: "tvOS", simulator_version: "18" },
           { platform: "watchOS", simulator_version: "11" },
-          { platform: "visionOS", simulator_version: "2" }
+          { platform: "visionOS", simulator_version: "2" },
+
+          # macOS runs on the host and doesn't need a simulator.
+          { platform: "macOS", simulator_version: "" }
         ]
     steps:
+      # ---------------------------
+      # Setup
+      # ---------------------------
+
       - name: List installed simulators
         run: xcrun simctl list devices
 
-      - id: destination
+      - name: Configure destination for target
+        id: destination
         uses: Brent-Tunnicliff/action-xcodebuild-destination-apple@v1
         with:
           platform: "${{ matrix.target.platform }}"
@@ -33,11 +46,74 @@ jobs:
       - name: Set Xcode version
         run: sudo xcode-select -s "/Applications/Xcode_16.4.app"
 
-      # Making a build manually to test destination is working.
-      - name: Build Debug
+      # ---------------------------
+      # Build and test package
+      # ---------------------------
+
+      - name: Build package debug
         run: xcodebuild build
-          -workspace "Package.xcworkspace"
-          -scheme "REPLACE_ME"
+          -workspace "$WORKSPACE"
+          -scheme "$PACKAGE_SCHEME"
+          -destination "${{ steps.destination.outputs.destination }}"
+          -configuration "Debug"
+          -skipPackagePluginValidation
+          CODE_SIGN_IDENTITY=""
+          CODE_SIGNING_REQUIRED=NO
+
+      - name: Build package tests
+        run: xcodebuild build-for-testing
+          -workspace "$WORKSPACE"
+          -scheme "$PACKAGE_SCHEME"
+          -destination "${{ steps.destination.outputs.destination }}"
+          -skipPackagePluginValidation
+          CODE_SIGN_IDENTITY=""
+          CODE_SIGNING_REQUIRED=NO
+
+      - name: Run package tests
+        run: xcodebuild test-without-building
+          -workspace "$WORKSPACE"
+          -scheme "$PACKAGE_SCHEME"
+          -destination "${{ steps.destination.outputs.destination }}"
+          CODE_SIGN_IDENTITY=""
+          CODE_SIGNING_REQUIRED=NO
+
+      # Lets make sure it also builds in release configuration in case there are conditionals.
+      - name: Build package release
+        run: xcodebuild build
+          -workspace "$WORKSPACE"
+          -scheme "$PACKAGE_SCHEME"
+          -destination "${{ steps.destination.outputs.destination }}"
+          -configuration "Release"
+          -skipPackagePluginValidation
+          CODE_SIGN_IDENTITY=""
+          CODE_SIGNING_REQUIRED=NO
+
+      # ---------------------------
+      # Build demo
+      # ---------------------------
+
+      - name: Configure demo scheme
+        id: demo_scheme
+        run: |
+          if [[ "${{ matrix.target.platform }}" == "watchOS" ]]; then
+            SCHEME="$DEMO_WATCH_SCHEME"
+          else
+            SCHEME="$DEMO_SCHEME"
+          fi
+
+          if [[ $SCHEME == "" ]]; then
+            echo "SCHEME missing"
+            exit 1
+          fi
+
+          echo $SCHEME
+          echo "scheme=$SCHEME" >> "$GITHUB_OUTPUT"
+
+      # We don't release demo, so only build the debug configuration.
+      - name: Build demo
+        run: xcodebuild build
+          -workspace "$WORKSPACE"
+          -scheme "${{ steps.demo_scheme.outputs.scheme }}"
           -destination "${{ steps.destination.outputs.destination }}"
           -configuration "Debug"
           -skipPackagePluginValidation
