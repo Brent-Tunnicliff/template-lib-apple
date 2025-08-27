@@ -119,3 +119,11 @@ jobs:
           -skipPackagePluginValidation
           CODE_SIGN_IDENTITY=""
           CODE_SIGNING_REQUIRED=NO
+
+      # ---------------------------
+      # Final checks
+      # ---------------------------
+
+      # Make sure there are no local changes as any auto generated changes must be checked into git.
+      - name: Check git status
+        uses: Brent-Tunnicliff/action-git-status@v1
