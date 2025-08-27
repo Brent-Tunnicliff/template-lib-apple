@@ -8,7 +8,7 @@ on:
 
 env:
   DEMO_SCHEME: "Demo"
-  DEMO_WATCH_SCHEME: "Demo Watch"
+  DEMO_WATCH_SCHEME: "Demo Watch App"
   PACKAGE_SCHEME: "REPLACE_ME"
   WORKSPACE: "Package.xcworkspace"
 
