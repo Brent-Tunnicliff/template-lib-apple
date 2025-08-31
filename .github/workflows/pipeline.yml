@@ -31,6 +31,9 @@ jobs:
       # Setup
       # ---------------------------
 
+      - name: List environment variables
+        run: set
+
       - name: List installed simulators
         run: xcrun simctl list devices
 
