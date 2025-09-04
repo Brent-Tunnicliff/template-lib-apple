@@ -56,10 +56,12 @@ jobs:
         run: |
           TARGET_COMPONENT="${{ matrix.target.platform }}"
           if [[ "${{ matrix.target.simulator_version }}" != "" ]]; then
-            TARGET_COMPONENT="$TARGET_COMPONENT-${{ matrix.target.simulator_version }}"
+            TARGET_COMPONENT="$TARGET_COMPONENT${{ matrix.target.simulator_version }}"
           fi
 
-          FILE_NAME="test-$PACKAGE_SCHEME-$TARGET_COMPONENT.xcresult"
+          # We cannot use : in the time, otherwise `actions/upload-artifact` fails.
+          TIMESTAMP=$(date -u +%Y-%m-%dT%H%M%SZ)
+          FILE_NAME="test-$PACKAGE_SCHEME-$TARGET_COMPONENT-$TIMESTAMP.xcresult"
           echo "file_name: $FILE_NAME"
           echo "file_name=$FILE_NAME" >> "$GITHUB_OUTPUT"
 
