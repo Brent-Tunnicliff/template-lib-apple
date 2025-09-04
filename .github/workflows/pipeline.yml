@@ -16,6 +16,8 @@ jobs:
   test:
     runs-on: macos-15
     strategy:
+      # Don't fail the other matrix values if one fails.
+      fail-fast: false
       matrix:
         target: [
           { platform: "iOS", simulator_version: "18" },
@@ -49,6 +51,22 @@ jobs:
       - name: Set Xcode version
         run: sudo xcode-select -s "/Applications/Xcode_16.4.app"
 
+      - name: Configure test results path
+        id: test_results_config
+        run: |
+          TARGET_COMPONENT="${{ matrix.target.platform }}"
+          if [[ "${{ matrix.target.simulator_version }}" != "" ]]; then
+            TARGET_COMPONENT="$TARGET_COMPONENT-${{ matrix.target.simulator_version }}"
+          fi
+
+          FILE_NAME="test-$PACKAGE_SCHEME-$TARGET_COMPONENT.xcresult"
+          echo "file_name: $FILE_NAME"
+          echo "file_name=$FILE_NAME" >> "$GITHUB_OUTPUT"
+
+          PATH="$GITHUB_WORKSPACE/build/test/$FILE_NAME"
+          echo "path: $PATH"
+          echo "path=$PATH" >> "$GITHUB_OUTPUT"
+
       # ---------------------------
       # Build and test package
       # ---------------------------
@@ -77,8 +95,17 @@ jobs:
           -workspace "$WORKSPACE"
           -scheme "$PACKAGE_SCHEME"
           -destination "${{ steps.destination.outputs.destination }}"
+          -resultBundlePath "${{ steps.test_results_config.outputs.path }}"
           CODE_SIGN_IDENTITY=""
           CODE_SIGNING_REQUIRED=NO
+
+      - name: Upload test results
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ steps.test_results_config.outputs.file_name }}"
+          path: "${{ steps.test_results_config.outputs.path }}"
+          if-no-files-found: error
 
       # Lets make sure it also builds in release configuration in case there are conditionals.
       - name: Build package release
