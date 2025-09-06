@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		843CA6932D92C71D004F2ECA /* Demo Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 843CA6862D92C71C004F2ECA /* Demo Watch App.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		843CA6992D92C761004F2ECA /* REPLACE_ME in Frameworks */ = {isa = PBXBuildFile; productRef = 843CA6982D92C761004F2ECA /* REPLACE_ME */; };
-		843CA6C92D92CC2C004F2ECA /* DemoCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 843CA6C82D92CC2C004F2ECA /* DemoCommon */; };
-		843CA6CB2D92CC33004F2ECA /* DemoCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 843CA6CA2D92CC33004F2ECA /* DemoCommon */; };
-		847B56A42D5CC58D001C7B81 /* REPLACE_ME in Frameworks */ = {isa = PBXBuildFile; productRef = 847B56A32D5CC58D001C7B81 /* REPLACE_ME */; };
+		8484F4BE2E6BBADB0047D222 /* REPLACE_ME in Frameworks */ = {isa = PBXBuildFile; productRef = 8484F4BD2E6BBADB0047D222 /* REPLACE_ME */; };
+		8484F4C02E6BBAEB0047D222 /* REPLACE_ME in Frameworks */ = {isa = PBXBuildFile; productRef = 8484F4BF2E6BBAEB0047D222 /* REPLACE_ME */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +38,6 @@
 
 /* Begin PBXFileReference section */
 		843CA6862D92C71C004F2ECA /* Demo Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		843CA6C52D92CA40004F2ECA /* DemoCommon */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DemoCommon; sourceTree = "<group>"; };
 		8457976C2C9EED48001B833D /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -62,8 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				843CA6CB2D92CC33004F2ECA /* DemoCommon in Frameworks */,
-				843CA6992D92C761004F2ECA /* REPLACE_ME in Frameworks */,
+				8484F4C02E6BBAEB0047D222 /* REPLACE_ME in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,8 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				843CA6C92D92CC2C004F2ECA /* DemoCommon in Frameworks */,
-				847B56A42D5CC58D001C7B81 /* REPLACE_ME in Frameworks */,
+				8484F4BE2E6BBADB0047D222 /* REPLACE_ME in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +77,6 @@
 		845797632C9EED48001B833D = {
 			isa = PBXGroup;
 			children = (
-				843CA6C52D92CA40004F2ECA /* DemoCommon */,
 				8457976E2C9EED48001B833D /* Demo */,
 				843CA6872D92C71C004F2ECA /* Demo Watch App */,
 				847B56A22D5CC58D001C7B81 /* Frameworks */,
@@ -127,8 +121,7 @@
 			);
 			name = "Demo Watch App";
 			packageProductDependencies = (
-				843CA6982D92C761004F2ECA /* REPLACE_ME */,
-				843CA6CA2D92CC33004F2ECA /* DemoCommon */,
+				8484F4BF2E6BBAEB0047D222 /* REPLACE_ME */,
 			);
 			productName = "Demo Watch App";
 			productReference = 843CA6862D92C71C004F2ECA /* Demo Watch App.app */;
@@ -154,8 +147,7 @@
 			);
 			name = Demo;
 			packageProductDependencies = (
-				847B56A32D5CC58D001C7B81 /* REPLACE_ME */,
-				843CA6C82D92CC2C004F2ECA /* DemoCommon */,
+				8484F4BD2E6BBADB0047D222 /* REPLACE_ME */,
 			);
 			productName = Demo;
 			productReference = 8457976C2C9EED48001B833D /* Demo.app */;
@@ -190,6 +182,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				84AA7F552D563944006598D6 /* XCRemoteSwiftPackageReference "swift-format-plugin" */,
+				8484F4BC2E6BBADB0047D222 /* XCLocalSwiftPackageReference "../../template-lib-apple" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8457976D2C9EED48001B833D /* Products */;
@@ -278,7 +271,6 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Debug;
@@ -307,7 +299,6 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -554,6 +545,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		8484F4BC2E6BBADB0047D222 /* XCLocalSwiftPackageReference "../../template-lib-apple" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../template-lib-apple";
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		84AA7F552D563944006598D6 /* XCRemoteSwiftPackageReference "swift-format-plugin" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -566,25 +564,18 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		843CA6982D92C761004F2ECA /* REPLACE_ME */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = REPLACE_ME;
-		};
 		843CA6C62D92CC10004F2ECA /* LintBuildPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 84AA7F552D563944006598D6 /* XCRemoteSwiftPackageReference "swift-format-plugin" */;
 			productName = "plugin:LintBuildPlugin";
 		};
-		843CA6C82D92CC2C004F2ECA /* DemoCommon */ = {
+		8484F4BD2E6BBADB0047D222 /* REPLACE_ME */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = DemoCommon;
+			productName = REPLACE_ME;
 		};
-		843CA6CA2D92CC33004F2ECA /* DemoCommon */ = {
+		8484F4BF2E6BBAEB0047D222 /* REPLACE_ME */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = DemoCommon;
-		};
-		847B56A32D5CC58D001C7B81 /* REPLACE_ME */ = {
-			isa = XCSwiftPackageProductDependency;
+			package = 8484F4BC2E6BBADB0047D222 /* XCLocalSwiftPackageReference "../../template-lib-apple" */;
 			productName = REPLACE_ME;
 		};
 		84AA7F562D563950006598D6 /* LintBuildPlugin */ = {
