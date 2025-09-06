@@ -134,9 +134,9 @@ jobs:
 
       # We don't release demo, so only build the debug configuration.
       - name: Build demo
-        run: |
-          cd Demo
-          xcodebuild build
+        working-directory: ./Demo
+        run: xcodebuild build
+            -project "Demo.xcodeproj"
             -scheme "${{ steps.demo_scheme.outputs.scheme }}"
             -destination "${{ steps.destination.outputs.destination }}"
             -configuration "Debug"
