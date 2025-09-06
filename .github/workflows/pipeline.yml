@@ -32,10 +32,13 @@ jobs:
       # Setup
       # ---------------------------
 
+      # List all environment variables to help with debugging possible issues.
       - name: List environment variables
         run: set
 
+      # If this matrix target runs on simulator, then list all simulators to help with debugging possible issues.
       - name: List installed simulators
+        if: ${{ matrix.target.simulator_version != '' }}
         run: xcrun simctl list devices
 
       - name: Configure destination for target
