@@ -10,7 +10,6 @@ env:
   DEMO_SCHEME: "Demo"
   DEMO_WATCH_SCHEME: "Demo Watch App"
   PACKAGE_SCHEME: "REPLACE_ME"
-  WORKSPACE: "Package.xcworkspace"
 
 jobs:
   test:
@@ -33,10 +32,13 @@ jobs:
       # Setup
       # ---------------------------
 
+      # List all environment variables to help with debugging possible issues.
       - name: List environment variables
         run: set
 
+      # If this matrix target runs on simulator, then list all simulators to help with debugging possible issues.
       - name: List installed simulators
+        if: ${{ matrix.target.simulator_version != '' }}
         run: xcrun simctl list devices
 
       - name: Configure destination for target
@@ -71,7 +73,6 @@ jobs:
 
       - name: Build package debug
         run: xcodebuild build
-          -workspace "$WORKSPACE"
           -scheme "$PACKAGE_SCHEME"
           -destination "${{ steps.destination.outputs.destination }}"
           -configuration "Debug"
@@ -81,7 +82,6 @@ jobs:
 
       - name: Build package tests
         run: xcodebuild build-for-testing
-          -workspace "$WORKSPACE"
           -scheme "$PACKAGE_SCHEME"
           -destination "${{ steps.destination.outputs.destination }}"
           -skipPackagePluginValidation
@@ -90,7 +90,6 @@ jobs:
 
       - name: Run package tests
         run: xcodebuild test-without-building
-          -workspace "$WORKSPACE"
           -scheme "$PACKAGE_SCHEME"
           -destination "${{ steps.destination.outputs.destination }}"
           -resultBundlePath "${{ steps.test_results_config.outputs.path }}"
@@ -108,7 +107,6 @@ jobs:
       # Lets make sure it also builds in release configuration in case there are conditionals.
       - name: Build package release
         run: xcodebuild build
-          -workspace "$WORKSPACE"
           -scheme "$PACKAGE_SCHEME"
           -destination "${{ steps.destination.outputs.destination }}"
           -configuration "Release"
@@ -139,14 +137,15 @@ jobs:
 
       # We don't release demo, so only build the debug configuration.
       - name: Build demo
+        working-directory: ./Demo
         run: xcodebuild build
-          -workspace "$WORKSPACE"
-          -scheme "${{ steps.demo_scheme.outputs.scheme }}"
-          -destination "${{ steps.destination.outputs.destination }}"
-          -configuration "Debug"
-          -skipPackagePluginValidation
-          CODE_SIGN_IDENTITY=""
-          CODE_SIGNING_REQUIRED=NO
+            -project "Demo.xcodeproj"
+            -scheme "${{ steps.demo_scheme.outputs.scheme }}"
+            -destination "${{ steps.destination.outputs.destination }}"
+            -configuration "Debug"
+            -skipPackagePluginValidation
+            CODE_SIGN_IDENTITY=""
+            CODE_SIGNING_REQUIRED=NO
 
       # ---------------------------
       # Final checks
