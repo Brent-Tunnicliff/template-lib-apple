@@ -34,7 +34,7 @@ jobs:
 
       - name: Setup pipeline
         id: setup
-        uses: Brent-Tunnicliff/action-setup-apple@70469b0339793cfd3159b8318cd73914a5c5d5fc
+        uses: Brent-Tunnicliff/action-setup-apple@v1
         with:
           platform: "${{ matrix.target.platform }}"
           simulator_version: "${{ matrix.target.simulator_version }}"
