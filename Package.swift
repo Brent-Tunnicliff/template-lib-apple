@@ -1,4 +1,4 @@
-// swift-tools-version: 6.1
+// swift-tools-version: 6.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 // Copyright © 2025 Brent Tunnicliff <brent@tunnicliff.dev>
 
@@ -9,11 +9,11 @@ import PackageDescription
 let package = Package(
     name: "REPLACE_ME",
     platforms: [
-        .iOS(.v18),
-        .macOS(.v15),
-        .tvOS(.v18),
-        .watchOS(.v11),
-        .visionOS(.v2),
+        .iOS(.v26),
+        .macOS(.v26),
+        .tvOS(.v26),
+        .watchOS(.v26),
+        .visionOS(.v26),
     ],
     products: [
         .library(
@@ -49,7 +49,14 @@ for target in package.targets {
 
     let swiftSettings = target.swiftSettings ?? []
     target.swiftSettings = swiftSettings + [
+        // Optional: Set defaultIsolation to `MainActor` if desired.
+        // Probably only useful in a UI heavy package.
+        // .defaultIsolation(MainActor.self),
+
         .enableUpcomingFeature("ExistentialAny"),
+        .enableUpcomingFeature("InferIsolatedConformances"),
         .enableUpcomingFeature("InternalImportsByDefault"),
+        .enableUpcomingFeature("MemberImportVisibility"),
+        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
     ]
 }
