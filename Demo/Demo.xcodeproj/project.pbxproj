@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,14 +25,12 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		843CA6942D92C71D004F2ECA /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
+			dstSubfolder = Product;
 			files = (
 				843CA6932D92C71D004F2ECA /* Demo Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -57,19 +55,15 @@
 /* Begin PBXFrameworksBuildPhase section */
 		843CA6832D92C71C004F2ECA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				8484F4C02E6BBAEB0047D222 /* REPLACE_ME in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		845797692C9EED48001B833D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				8484F4BE2E6BBADB0047D222 /* REPLACE_ME in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -184,7 +178,7 @@
 				84AA7F552D563944006598D6 /* XCRemoteSwiftPackageReference "swift-format-plugin" */,
 				8484F4BC2E6BBADB0047D222 /* XCLocalSwiftPackageReference "../../template-lib-apple" */,
 			);
-			preferredProjectObjectVersion = 77;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 8457976D2C9EED48001B833D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -198,34 +192,26 @@
 /* Begin PBXResourcesBuildPhase section */
 		843CA6842D92C71C004F2ECA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8457976A2C9EED48001B833D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		843CA6822D92C71C004F2ECA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		845797682C9EED48001B833D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -247,7 +233,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		843CA6952D92C71D004F2ECA /* Debug */ = {
+		843CA6952D92C71D004F2ECA /* Debug configuration for PBXNativeTarget "Demo Watch App" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -275,7 +261,7 @@
 			};
 			name = Debug;
 		};
-		843CA6962D92C71D004F2ECA /* Release */ = {
+		843CA6962D92C71D004F2ECA /* Release configuration for PBXNativeTarget "Demo Watch App" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -304,7 +290,7 @@
 			};
 			name = Release;
 		};
-		845797792C9EED49001B833D /* Debug */ = {
+		845797792C9EED49001B833D /* Debug configuration for PBXProject "Demo" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -383,7 +369,7 @@
 			};
 			name = Debug;
 		};
-		8457977A2C9EED49001B833D /* Release */ = {
+		8457977A2C9EED49001B833D /* Release configuration for PBXProject "Demo" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -453,7 +439,7 @@
 			};
 			name = Release;
 		};
-		8457977C2C9EED49001B833D /* Debug */ = {
+		8457977C2C9EED49001B833D /* Debug configuration for PBXNativeTarget "Demo" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -487,7 +473,7 @@
 			};
 			name = Debug;
 		};
-		8457977D2C9EED49001B833D /* Release */ = {
+		8457977D2C9EED49001B833D /* Release configuration for PBXNativeTarget "Demo" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -527,28 +513,25 @@
 		843CA6972D92C71D004F2ECA /* Build configuration list for PBXNativeTarget "Demo Watch App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				843CA6952D92C71D004F2ECA /* Debug */,
-				843CA6962D92C71D004F2ECA /* Release */,
+				843CA6952D92C71D004F2ECA /* Debug configuration for PBXNativeTarget "Demo Watch App" */,
+				843CA6962D92C71D004F2ECA /* Release configuration for PBXNativeTarget "Demo Watch App" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		845797672C9EED48001B833D /* Build configuration list for PBXProject "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				845797792C9EED49001B833D /* Debug */,
-				8457977A2C9EED49001B833D /* Release */,
+				845797792C9EED49001B833D /* Debug configuration for PBXProject "Demo" */,
+				8457977A2C9EED49001B833D /* Release configuration for PBXProject "Demo" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		8457977B2C9EED49001B833D /* Build configuration list for PBXNativeTarget "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8457977C2C9EED49001B833D /* Debug */,
-				8457977D2C9EED49001B833D /* Release */,
+				8457977C2C9EED49001B833D /* Debug configuration for PBXNativeTarget "Demo" */,
+				8457977D2C9EED49001B833D /* Release configuration for PBXNativeTarget "Demo" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
