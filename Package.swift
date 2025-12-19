@@ -36,7 +36,8 @@ let package = Package(
 // MARK: - Common target settings
 
 // Sets values that are common for every target.
-for target in package.targets {
+// Plugins cannot contain plugins or swift settings.
+for target in package.targets where target.type != .plugin {
     // MARK: Plugins
 
     let commonPlugins: [PackageDescription.Target.PluginUsage] = [
