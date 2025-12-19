@@ -10,7 +10,7 @@ env:
   DEMO_PROJECT: "Demo.xcodeproj"
   DEMO_SCHEME: "Demo"
   DEMO_WATCH_SCHEME: "Demo Watch App"
-  PACKAGE_SCHEME: "REPLACE_ME"
+  PACKAGE_SCHEME: "REPLACE_ME-Package"
 
 jobs:
   test:
