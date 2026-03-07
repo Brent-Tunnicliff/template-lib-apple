@@ -6,87 +6,60 @@ on:
   push:
   workflow_dispatch:
 
-env:
-  DEMO_PROJECT: "Demo.xcodeproj"
-  DEMO_SCHEME: "Demo"
-  DEMO_WATCH_SCHEME: "Demo Watch App"
-  PACKAGE_SCHEME: "REPLACE_ME-Package"
-  RUNS_ON: "macos-26"
-  SIMULATOR_VERSION: "26.2"
-  XCODE_PATH: "/Applications/Xcode_26.3.app"
-
 jobs:
-  # Expose env values for the following jobs as `matrix` and `with` cannot reference env.
-  prepare_env:
-    runs-on: "ubuntu-latest"
-    steps:
-       - run: echo "Exporting env"
-         shell: bash
-    outputs:
-      demo_scheme: ${{ env.DEMO_SCHEME }}
-      demo_watch_scheme: ${{ env.DEMO_WATCH_SCHEME }}
-      package_scheme: ${{ env.PACKAGE_SCHEME }}
-      runs_on: ${{ env.RUNS_ON }}
-      simulator_version: ${{ env.SIMULATOR_VERSION }}
-      xcode_path: ${{ env.XCODE_PATH }}
-
   package:
-    needs: [prepare_env]
     strategy:
       # Don't cancel the other matrix values if one fails.
       fail-fast: false
       matrix:
         target: [
-          { platform: "iOS", simulator_version: "${{ needs.prepare_env.simulator_version }}" },
-          { platform: "tvOS", simulator_version: "${{ needs.prepare_env.simulator_version }}" },
-          { platform: "watchOS", simulator_version: "${{ needs.prepare_env.simulator_version }}" },
-          { platform: "visionOS", simulator_version: "${{ needs.prepare_env.simulator_version }}" },
+          { platform: "iOS", simulator_version: "26.2" },
+          { platform: "tvOS", simulator_version: "26.2" },
+          { platform: "watchOS", simulator_version: "26.2" },
+          { platform: "visionOS", simulator_version: "26.2" },
 
           # macOS runs on the host and doesn't need a simulator.
           { platform: "macOS", simulator_version: "" }
         ]
-    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/xcodebuild.yml@v2
+    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/xcodebuild.yml@add_working_directory
     with:
       platform: "${{ matrix.target.platform }}"
-      runs_on: "${{ needs.prepare_env.runs_on }}"
-      scheme: "${{ needs.prepare_env.package_scheme }}"
+      runs_on: "macos-26"
+      scheme: "REPLACE_ME-Package"
       simulator_version: "${{ matrix.target.simulator_version }}"
-      xcode_path: "${{ needs.prepare_env.xcode_path }}"
+      xcode_path: "/Applications/Xcode_26.3.app"
 
   demo:
-    needs: [prepare_env]
-    defaults:
-      run:
-        working-directory: ./Demo
     strategy:
       # Don't cancel the other matrix values if one fails.
       fail-fast: false
       matrix:
         target: [
-          { platform: "iOS", simulator_version: "${{ needs.prepare_env.simulator_version }}" },
-          { platform: "tvOS", simulator_version: "${{ needs.prepare_env.simulator_version }}" },
-          { platform: "watchOS", simulator_version: "${{ needs.prepare_env.simulator_version }}" },
-          { platform: "visionOS", simulator_version: "${{ needs.prepare_env.simulator_version }}" },
+          { platform: "iOS", simulator_version: "26.2" },
+          { platform: "tvOS", simulator_version: "26.2" },
+          { platform: "watchOS", simulator_version: "26.2" },
+          { platform: "visionOS", simulator_version: "26.2" },
 
           # macOS runs on the host and doesn't need a simulator.
           { platform: "macOS", simulator_version: "" }
         ]
-    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/xcodebuild.yml@v2
+    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/xcodebuild.yml@add_working_directory
     with:
       platform: "${{ matrix.target.platform }}"
-      runs_on: "${{ needs.prepare_env.runs_on }}"
+      runs_on: "macos-26"
       # watch has its own scheme and target.
       scheme: "${{ case(
-        matrix.target.platform == 'watchOS', 'needs.prepare_env.demo_watch_scheme',
-        'needs.prepare_env.demo_scheme'
-      }}"
+        matrix.target.platform == 'watchOS', 'Demo Watch App',
+        'Demo'
+      ) }}"
       simulator_version: "${{ matrix.target.simulator_version }}"
       # No tests configured for demo app.
       skip_tests: true
-      xcode_path: "${{ needs.prepare_env.xcode_path }}"
+      xcode_path: "/Applications/Xcode_26.3.app"
+      working_directory: "./Demo"
 
   lint:
-    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/lint.yml@v2
+    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/lint.yml@add_working_directory
     with:
       runs_on: "macos-26"
 
