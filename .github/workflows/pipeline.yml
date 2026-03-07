@@ -21,7 +21,7 @@ jobs:
           # macOS runs on the host and doesn't need a simulator.
           { platform: "macOS", simulator_version: "" }
         ]
-    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/xcodebuild.yml@add_working_directory
+    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/xcodebuild.yml@v2
     with:
       platform: "${{ matrix.target.platform }}"
       runs_on: "macos-26"
@@ -43,7 +43,7 @@ jobs:
           # macOS runs on the host and doesn't need a simulator.
           { platform: "macOS", simulator_version: "" }
         ]
-    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/xcodebuild.yml@add_working_directory
+    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/xcodebuild.yml@v2
     with:
       platform: "${{ matrix.target.platform }}"
       runs_on: "macos-26"
@@ -56,10 +56,10 @@ jobs:
       # No tests configured for demo app.
       skip_tests: true
       xcode_path: "/Applications/Xcode_26.3.app"
-      working_directory: "./Demo"
+      # working_directory: "./Demo"
 
   lint:
-    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/lint.yml@add_working_directory
+    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/lint.yml@v2
     with:
       runs_on: "macos-26"
 
