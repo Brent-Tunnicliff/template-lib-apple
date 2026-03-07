@@ -55,6 +55,9 @@ jobs:
 
   demo:
     needs: [prepare_env]
+    defaults:
+      run:
+        working-directory: ./Demo
     strategy:
       # Don't cancel the other matrix values if one fails.
       fail-fast: false
@@ -74,14 +77,13 @@ jobs:
       runs_on: "${{ needs.prepare_env.runs_on }}"
       # watch has its own scheme and target.
       scheme: "${{ case(
-        matrix.target.platform == 'watchOS', needs.prepare_env.demo_watch_scheme,
-        needs.prepare_env.demo_scheme
+        matrix.target.platform == 'watchOS', 'needs.prepare_env.demo_watch_scheme',
+        'needs.prepare_env.demo_scheme'
       }}"
       simulator_version: "${{ matrix.target.simulator_version }}"
       # No tests configured for demo app.
       skip_tests: true
       xcode_path: "${{ needs.prepare_env.xcode_path }}"
-    working-directory: ./Demo
 
   lint:
     uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/lint.yml@v2
