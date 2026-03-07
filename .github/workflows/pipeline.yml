@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  package:
+  package_xcodebuild:
     strategy:
       # Don't cancel the other matrix values if one fails.
       fail-fast: false
@@ -28,6 +28,20 @@ jobs:
       scheme: "REPLACE_ME-Package"
       simulator_version: "${{ matrix.target.simulator_version }}"
       xcode_path: "/Applications/Xcode_26.3.app"
+
+  package_swift:
+    strategy:
+      # Don't cancel the other matrix values if one fails.
+      fail-fast: false
+      matrix:
+        run_on: [
+          "ubuntu-latest",
+          "macos-latest",
+          "windows-latest",
+        ]
+    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/swift.yml@v2
+    with:
+      runs_on: "${{ matrix.run_on }}"
 
   demo:
     strategy:
