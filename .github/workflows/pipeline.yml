@@ -4,7 +4,13 @@ name: Pipeline
 
 on:
   push:
+    paths:
+      - '**.resolved'
+      - '**.swift'
+      - '**/pipeline.yml'
   workflow_dispatch:
+
+permissions: {}
 
 jobs:
   package_xcodebuild:
@@ -13,10 +19,10 @@ jobs:
       fail-fast: false
       matrix:
         target: [
-          { platform: "iOS", simulator_version: "26.2" },
-          { platform: "tvOS", simulator_version: "26.2" },
-          { platform: "watchOS", simulator_version: "26.2" },
-          { platform: "visionOS", simulator_version: "26.2" },
+          { platform: "iOS", simulator_version: "26" },
+          { platform: "tvOS", simulator_version: "26" },
+          { platform: "watchOS", simulator_version: "26" },
+          { platform: "visionOS", simulator_version: "26" },
 
           # macOS runs on the host and doesn't need a simulator.
           { platform: "macOS", simulator_version: "" }
@@ -27,7 +33,7 @@ jobs:
       runs_on: "macos-26"
       scheme: "REPLACE_ME-Package"
       simulator_version: "${{ matrix.target.simulator_version }}"
-      xcode_path: "/Applications/Xcode_26.3.app"
+      xcode_path: "/Applications/Xcode_26.6.app"
 
   package_swift:
     strategy:
@@ -69,7 +75,7 @@ jobs:
       simulator_version: "${{ matrix.target.simulator_version }}"
       # No tests configured for demo app.
       skip_tests: true
-      xcode_path: "/Applications/Xcode_26.3.app"
+      xcode_path: "/Applications/Xcode_26.6.app"
       working_directory: "./Demo"
 
   lint:
