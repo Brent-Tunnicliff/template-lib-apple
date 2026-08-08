@@ -13,7 +13,7 @@ on:
 permissions: {}
 
 jobs:
-  package_xcodebuild:
+  xcodebuild:
     strategy:
       # Don't cancel the other matrix values if one fails.
       fail-fast: false
@@ -35,7 +35,7 @@ jobs:
       simulator_version: "${{ matrix.target.simulator_version }}"
       xcode_path: "/Applications/Xcode_26.6.app"
 
-  package_swift:
+  swift:
     strategy:
       # Don't cancel the other matrix values if one fails.
       fail-fast: false
@@ -48,6 +48,25 @@ jobs:
     uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/swift.yml@v2
     with:
       runs_on: "${{ matrix.run_on }}"
+
+  swift_sdks:
+    strategy:
+      # Don't cancel the other matrix values if one fails.
+      fail-fast: false
+      matrix:
+        platform: ["android", "wasm"]
+        swift_version: ["6.3.3"]
+    uses: Brent-Tunnicliff/workflow-common-apple/.github/workflows/swift.yml@v2
+    name: "swift (${{ matrix.platform }})"
+    with:
+      # A bug with wasm means that we cannot run tests if exporting a report, so better to run tests with no report.
+      generate_test_report: ${{ matrix.platform != 'wasm' }}
+      runs_on: "ubuntu-latest"
+      sdks: "${{ matrix.platform }}"
+      # Android requires building and deploying the tests bundle to an emulator to test, so just skipping.
+      skip_tests: ${{ matrix.platform == 'android' }}
+      swift_sdk: "swift-${{ matrix.swift_version }}-RELEASE_${{ matrix.platform }}"
+      swift_version: "${{ matrix.swift_version }}"
 
   demo:
     strategy:
