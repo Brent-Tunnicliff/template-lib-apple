@@ -15,5 +15,7 @@ We'd like this package to quickly embrace Swift language and toolchain improveme
 
 ## Disclaimer
 
+I only ever pretend to know what I am doing. If you find something wrong please raise an issue to let me know.
+
 This project is open source and open to anyone to use as they see fit.
 But I am building this with myself as the main target audience, so this will not be published anywhere.
